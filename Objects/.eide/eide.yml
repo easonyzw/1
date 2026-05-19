@@ -1,0 +1,193 @@
+version: "4.1"
+name: HR16L0Q0A0D-PC21-EPG4.0
+type: ARM
+deviceName: STM32F051R8Tx
+packDir: .pack/Keil/STM32F0xx_DFP.2.1.0
+srcDirs: []
+virtualFolder:
+  name: <virtual_root>
+  files: []
+  folders:
+    - name: Startup
+      files:
+        - path: ../Libraries/CMSIS/DeviceSupport/startup/startup_stm32f051.s
+      folders: []
+    - name: STM32F0xx_StdPeriph_Driver
+      files:
+        - path: ../Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_dma.c
+        - path: ../Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.c
+        - path: ../Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.c
+        - path: ../Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.c
+        - path: ../Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.c
+        - path: ../Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.c
+        - path: ../Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_wwdg.c
+        - path: ../Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.c
+        - path: ../Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.c
+        - path: ../Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_syscfg.c
+      folders: []
+    - name: CMSIS
+      files:
+        - path: ../Libraries/CMSIS/DeviceSupport/system_stm32f0xx.c
+      folders: []
+    - name: Hardware
+      files:
+        - path: ../Hardware/Hardware.c
+        - path: ../Hardware/Hardware_GPIO.c
+        - path: ../Hardware/Hardware_NVIC.c
+        - path: ../Hardware/Hardware_RCC.c
+        - path: ../Hardware/Hardware_timer.c
+        - path: ../Hardware/Hardware_usart.c
+        - path: ../Hardware/Hardware_EXTI.c
+        - path: ../Hardware/Hardware_systick.c
+      folders: []
+    - name: Soft_layer
+      files:
+        - path: ../Soft_layer/Soft_layer.c
+        - path: ../Soft_layer/Soft_layer_bus.c
+        - path: ../Soft_layer/Soft_layer_crc16.c
+        - path: ../Soft_layer/Soft_layer_flash.c
+        - path: ../Soft_layer/Soft_layer_IO_input.c
+        - path: ../Soft_layer/Soft_layer_rs485.c
+      folders: []
+    - name: main
+      files:
+        - path: ../main/main.c
+        - path: ../main/stm32f0xx_it.c
+      folders: []
+dependenceList: []
+outDir: build
+miscInfo:
+  uid: cab698a6958595a5b76e2fba1663be2b
+targets:
+  HR16L0Q0A0D-PC21-EPG4.0:
+    cppPreprocessAttrs:
+      defineList:
+        - STM32F051x8
+      incList:
+        - ../main
+        - ../Soft_layer
+        - ../Hardware
+        - ../Libraries/CMSIS/CoreSupport
+        - ../Libraries/CMSIS/DeviceSupport/startup
+        - ../Libraries/CMSIS/DeviceSupport
+        - ../Libraries/STM32F0xx_StdPeriph_Driver/inc
+        - .cmsis/include
+        - RTE/_HR16L0Q0A0D-PC21-EPG4.0
+      libList: []
+    excludeList: []
+    settings: {}
+    toolchain: AC5
+    toolchainConfigMap:
+      AC5:
+        archExtensions: ""
+        cpuType: Cortex-M0
+        floatingPointHardware: none
+        options:
+          version: 4
+          afterBuildTasks: []
+          asm-compiler:
+            defines: []
+          beforeBuildTasks: []
+          c/cpp-compiler:
+            CXX_FLAGS: --diag_suppress=1 --diag_suppress=1295
+            C_FLAGS: --diag_suppress=1 --diag_suppress=1295
+            c99-mode: true
+            one-elf-section-per-function: true
+            optimization: level-0
+            warnings: all-warnings
+          global:
+            output-debug-info: enable
+            use-microLIB: false
+          linker:
+            $outputTaskExcludes:
+              - .bin
+            output-format: elf
+            ro-base: "0x08000000"
+            rw-base: "0x20000000"
+            xo-base: ""
+        scatterFilePath: ""
+        storageLayout:
+          RAM:
+            - id: 1
+              isChecked: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              noInit: false
+              tag: RAM
+            - id: 2
+              isChecked: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              noInit: false
+              tag: RAM
+            - id: 3
+              isChecked: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              noInit: false
+              tag: RAM
+            - id: 1
+              isChecked: true
+              mem:
+                size: "0x2000"
+                startAddr: "0x20000000"
+              noInit: false
+              tag: IRAM
+            - id: 2
+              isChecked: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              noInit: false
+              tag: IRAM
+          ROM:
+            - id: 1
+              isChecked: false
+              isStartup: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              tag: ROM
+            - id: 2
+              isChecked: false
+              isStartup: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              tag: ROM
+            - id: 3
+              isChecked: false
+              isStartup: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              tag: ROM
+            - id: 1
+              isChecked: true
+              isStartup: true
+              mem:
+                size: "0x10000"
+                startAddr: "0x8000000"
+              tag: IROM
+            - id: 2
+              isChecked: false
+              isStartup: false
+              mem:
+                size: "0x0"
+                startAddr: "0x0"
+              tag: IROM
+        useCustomScatterFile: false
+    uploadConfigMap:
+      JLink:
+        baseAddr: ""
+        bin: ""
+        cpuInfo:
+          cpuName: "null"
+          vendor: "null"
+        otherCmds: ""
+        proType: 1
+        speed: 8000
+    uploader: JLink
