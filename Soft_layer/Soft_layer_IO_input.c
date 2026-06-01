@@ -1,4 +1,4 @@
-#include "soft_layer_IO_input.h"
+#include "Soft_layer_IO_input.h"
 
 sIO_parameter IO_parameter[16];
 
@@ -141,7 +141,11 @@ void IO_state_update(void)
         IO_channel_update(i);
     }
 
-    module_show_status_running();
+    /* 仅当所有输入通道均为低电平时，才显示运行心跳灯。有输入常亮 LED 本身即是状态指示。 */
+    if((IO_Input_L == 0) && (IO_Input_H == 0))
+    {
+        module_show_status_running();
+    }
 }
 
 /******************************************************************

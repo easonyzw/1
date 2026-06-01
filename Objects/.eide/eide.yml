@@ -61,9 +61,9 @@ miscInfo:
 targets:
   HR16L0Q0A0D-PC21-EPG4.0:
     cppPreprocessAttrs:
-      defineList:
-        - STM32F051x8
+      defineList: []
       incList:
+        - .
         - ../main
         - ../Soft_layer
         - ../Hardware
@@ -75,7 +75,8 @@ targets:
         - RTE/_HR16L0Q0A0D-PC21-EPG4.0
       libList: []
     excludeList: []
-    settings: {}
+    settings:
+      debugger: cortex-debug
     toolchain: AC5
     toolchainConfigMap:
       AC5:
