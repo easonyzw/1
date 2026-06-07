@@ -149,19 +149,27 @@ void IO_state_update(void)
 }
 
 /******************************************************************
- * @brief  LED status of station number waiting
+ * @brief  LED status during station-number waiting
  * @input  none
  * @return none
+ *
+ * @note   该函数只在 receive_pulse_station_number() 等待 BUS 编址脉冲阶段调用。
+ *         timer_counter.LED_ms 由 TIM3 中断周期性递增：
+ *         - LED_ms > 250 时，打开全部 LED；
+ *         - LED_ms > 500 时，关闭全部 LED，并清零计数。
+ *         因此模块在等待站号初始化时，会表现为“全亮/全灭”周期闪烁。
  ******************************************************************/
 void module_show_status(void)
 {
     if(timer_counter.LED_ms > 500)
     {
+        /* 一个闪烁周期结束：关闭所有 LED，并重新开始计时 */
         LED_all_close();
         timer_counter.LED_ms = 0;
     }
     else if(timer_counter.LED_ms > 250)
     {
+        /* 周期后半段：打开所有 LED，用于提示模块正在等待编址 */
         LED_all_open();
     }
 }
