@@ -90,15 +90,23 @@ static void IO_channel_update(unsigned char channel)
 {
     unsigned char input_state;
 
-    if(timer_counter.IO_filter[channel] < IO_parameter[channel].filter)
+//     如果当前 IO 滤波计数还没达到设定滤波值，就直接退出当前函数，本次不处理这个 IO 状态。
+	
+	if(timer_counter.IO_filter[channel] < IO_parameter[channel].filter)
     {
         return;
     }
 
-    input_state = GPIO_ReadInputDataBit(IO_channel_table[channel].input_port,
-                                        IO_channel_table[channel].input_pin);
-
-    if(input_state == SET)
+    
+		
+		// 读取当前 channel 对应的输入引脚电平
+// IO_channel_table[channel].input_port：当前通道对应的 GPIO 端口，比如 GPIOA/GPIOB/GPIOC
+// IO_channel_table[channel].input_pin ：当前通道对应的 GPIO 引脚，比如 GPIO_Pin_6
+// 返回值保存到 input_state，结果一般为 SET 或 RESET
+input_state = GPIO_ReadInputDataBit(IO_channel_table[channel].input_port,
+                                    IO_channel_table[channel].input_pin);
+    
+		if(input_state == SET)
     {
         IO_led_set(channel, 1);
         IO_status_bit_set(channel, 1);
@@ -136,12 +144,21 @@ void IO_state_update(void)
 {
     unsigned char i;
 
-    for(i = 0; i < 16; i++)
-    {
+   
+
+
+
+	for(i = 0; i < 16; i++)
+   
+
+
+
+	{
         IO_channel_update(i);
     }
 
-    /* 仅当所有输入通道均为低电平时，才显示运行心跳灯。有输入常亮 LED 本身即是状态指示。 */
+//    如果 CH0~CH15 全部没有输入信号，
+//就执行运行状态指示灯闪烁。
     if((IO_Input_L == 0) && (IO_Input_H == 0))
     {
         module_show_status_running();
